@@ -2,7 +2,7 @@ import pygame
 import random
 import time
 
-# Initialize pygame
+
 pygame.init()
 
 # Screen setup
@@ -12,28 +12,26 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Paul's Mario Jump Game")
 clock = pygame.time.Clock()
 
-# Load's the mario character
 mario_image = pygame.image.load('/Users/pauladutwum/Downloads/mario.png')
 
-# Resize the Mario image
+
 mario_image = pygame.transform.scale(mario_image, (50, 50))
 
 mario_rect = mario_image.get_rect()
 mario_rect.x = 50
 mario_rect.y = SCREEN_HEIGHT - 100
 
-# Load sound effects
+
 collision_sound = pygame.mixer.Sound('/Users/pauladutwum/Documents/Myprojects/Equatorial Complex.mp3')
 
 
 pygame.mixer.music.load('/Users/pauladutwum/Documents/Myprojects/Nowhere Land.mp3')
-pygame.mixer.music.play(-1)  # Play music indefinitely in the background
+pygame.mixer.music.play(-1) 
 
 # Game over font
 font = pygame.font.Font(None, 72)
 small_font = pygame.font.Font(None, 36)
 
-# Variables for Jumping and Movement
 is_jumping = False
 jump_speed = 20
 gravity = 1
@@ -63,7 +61,7 @@ try:
 except FileNotFoundError:
     highest_score = 0
 
-# Background color variables
+
 background_color = (255, 255, 255)  
 
 def reset_game():
@@ -75,8 +73,7 @@ def reset_game():
     score = 0
     current_shape = random.choice(obstacle_shapes)
     background_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))  # New random color
-    pygame.mixer.music.play(-1)  # Restart background music
-
+    pygame.mixer.music.play(-1)  
 
 def countdown():
     for i in range(3, 0, -1):
@@ -102,7 +99,7 @@ def save_highest_score():
 
 
 def game_loop():
-    global score, is_jumping, velocity, obstacle_x, highest_score, obstacle_speed, background_color, current_shape # Add obstacle_speed to global declaration
+    global score, is_jumping, velocity, obstacle_x, highest_score, obstacle_speed, background_color, current_shape 
     running = True
     game_over = False
 
@@ -161,7 +158,7 @@ def game_loop():
             # Draw Mario
             screen.blit(mario_image, mario_rect)
 
-            # Draw the obstacle (random shape)
+           
             if current_shape == "rect":
                 pygame.draw.rect(screen, (255, 0, 0), (obstacle_x, obstacle_y, obstacle_width, obstacle_height))
             elif current_shape == "circle":
@@ -171,24 +168,23 @@ def game_loop():
             elif current_shape == "furniture":
                 pygame.draw.rect(screen, (255, 165, 0), (obstacle_x, obstacle_y, obstacle_width, obstacle_height + 50))  # Simulating furniture
 
-            # Check for collision between Mario and obstacle
+           
             if mario_rect.colliderect(pygame.Rect(obstacle_x, obstacle_y, obstacle_width, obstacle_height)):
                 print("Collision detected!")
                 collision_sound.play()  # Play collision sound
                 game_over = True
-                save_highest_score()  # Save the score after collision
+                save_highest_score()  
 
-            # Display the score and highest score
             score_text = small_font.render(f"Score: {score}", True, (0, 0, 0))
             highest_score_text = small_font.render(f"Highest Score: {highest_score}", True, (0, 0, 0))
             screen.blit(score_text, (10, 10))
             screen.blit(highest_score_text, (10, 40))
 
-            # Update the display
+          
             pygame.display.update()
 
         else:
-            # Show Game Over message
+       
             game_over_text = font.render("Game Over! Press 'R' to Retry", True, (255, 0, 0))
             screen.blit(game_over_text, (SCREEN_WIDTH // 2 - game_over_text.get_width() // 2, SCREEN_HEIGHT // 2))
             pygame.display.update()
@@ -199,7 +195,7 @@ def game_loop():
 
 # ubatructions
 def welcome_screen():
-    screen.fill((0, 0, 0))  # Set background color to black
+    screen.fill((0, 0, 0))  
     welcome_text = font.render("Welcome to Paul's Mario  Game", True, (255, 255, 255))
     instructions_text_1 = small_font.render("Instructions:", True, (255, 255, 255))
     instructions_text_2 = small_font.render("1. Press the UP arrow to jump.", True, (255, 255, 255))
@@ -209,7 +205,6 @@ def welcome_screen():
     instructions_text_6 = small_font.render("5. Press 'R' to retry after a game over.", True, (255, 255, 255))
     start_text = small_font.render("Press any key to start...", True, (255, 255, 0))
 
-    # Display the welcome and instructions on the screen
     screen.blit(welcome_text, (SCREEN_WIDTH // 2 - welcome_text.get_width() // 2, 100))
     screen.blit(instructions_text_1, (50, 200))
     screen.blit(instructions_text_2, (50, 240))
@@ -221,7 +216,7 @@ def welcome_screen():
 
     pygame.display.update()
 
-    # Wait for the player to press any key
+   
     waiting = True
     while waiting:
         for event in pygame.event.get():
@@ -231,10 +226,9 @@ def welcome_screen():
             if event.type == pygame.KEYDOWN:
                 waiting = False
 
-# Main program to run the game
 def main():
-    welcome_screen()  # Display the welcome screen before starting the game
-    game_loop()  # Start the main game loop
+    welcome_screen()  
+    game_loop()  
 
 if __name__ == "__main__":
-    main()  # Run the game
+    main()  
