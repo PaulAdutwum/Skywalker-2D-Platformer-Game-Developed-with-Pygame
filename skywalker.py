@@ -28,7 +28,7 @@ collision_sound = pygame.mixer.Sound('/Users/pauladutwum/Documents/Myprojects/Eq
 pygame.mixer.music.load('/Users/pauladutwum/Documents/Myprojects/Nowhere Land.mp3')
 pygame.mixer.music.play(-1) 
 
-# Game over font
+
 font = pygame.font.Font(None, 72)
 small_font = pygame.font.Font(None, 36)
 
@@ -193,7 +193,7 @@ def game_loop():
 
     pygame.quit()
 
-# ubatructions
+
 def welcome_screen():
     screen.fill((0, 0, 0))  
     welcome_text = font.render("Welcome to Paul's Mario  Game", True, (255, 255, 255))
