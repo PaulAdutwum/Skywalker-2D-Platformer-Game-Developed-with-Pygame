@@ -133,6 +133,7 @@ def game_loop():
                 mario_rect.x += mario_speed
                 if mario_rect.x + mario_rect.width > SCREEN_WIDTH:  
                     mario_rect.x = SCREEN_WIDTH - mario_rect.width
+                    
 
            
             if is_jumping:
